@@ -53,6 +53,7 @@ class ProductMapperTest {
 
     @Test
     void toProduct_shouldNotConvertToProduct_whenProductRequestNull() {
-        fail("not implemented");
+        assertThat(mapper.toProduct(null))
+                .isNull();
     }
 }
