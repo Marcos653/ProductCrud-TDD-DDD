@@ -1,15 +1,23 @@
 package com.example.productsapi.application.controller;
 
+import com.example.productsapi.application.dto.request.ProductRequest;
+import com.example.productsapi.domain.enums.ECategory;
 import com.example.productsapi.domain.service.contract.IProductService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import lombok.SneakyThrows;
 
-import static org.assertj.core.api.Fail.fail;
+import java.math.BigDecimal;
+
+import static com.example.productsapi.helper.ProductHelper.oneProductRequest;
+import static com.example.productsapi.helper.TestsHelper.convertObjectToJsonBytes;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(ProductController.class)
@@ -23,6 +31,14 @@ class ProductControllerTest {
     private MockMvc mockMvc;
     @MockBean
     private IProductService service;
+
+    private ProductRequest productRequest;
+
+    @BeforeEach
+    void setUp() {
+        productRequest = oneProductRequest("Laptop", "High-end gaming laptop",
+                new BigDecimal("1500.00"), 10, ECategory.ELECTRONICS);
+    }
 
     @Test
     @SneakyThrows
@@ -41,6 +57,9 @@ class ProductControllerTest {
     @Test
     @SneakyThrows
     void save_shouldReturnStatusOk_whenCalled() {
-        fail("not implemented");
+        mockMvc.perform(post(API_URL)
+                        .content(convertObjectToJsonBytes(productRequest))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 }

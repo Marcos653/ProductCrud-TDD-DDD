@@ -1,5 +1,6 @@
 package com.example.productsapi.application.controller;
 
+import com.example.productsapi.application.dto.request.ProductRequest;
 import com.example.productsapi.domain.service.contract.IProductService;
 import com.example.productsapi.application.dto.response.ProductResponse;
 import com.example.productsapi.application.controller.contract.IProductController;
@@ -24,5 +25,10 @@ public class ProductController implements IProductController {
     @Override
     public ProductResponse getById(Long id) {
         return service.getById(id);
+    }
+
+    @Override
+    public ProductResponse save(ProductRequest request) {
+        return service.save(request);
     }
 }
