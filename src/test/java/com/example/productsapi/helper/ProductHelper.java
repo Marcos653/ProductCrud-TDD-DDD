@@ -1,5 +1,6 @@
 package com.example.productsapi.helper;
 
+import com.example.productsapi.application.dto.request.ProductRequest;
 import com.example.productsapi.application.dto.response.ProductResponse;
 import com.example.productsapi.domain.enums.ECategory;
 import com.example.productsapi.domain.model.Product;
@@ -24,6 +25,11 @@ public class ProductHelper {
     public static ProductResponse oneProductResponse(Long id, String name, String description,
                                                      BigDecimal price, Integer quantity, String category) {
         return new ProductResponse(id, name, description, price, quantity, category);
+    }
+
+    public static ProductRequest oneProductRequest(String name, String description, BigDecimal price,
+                                                    Integer quantity, ECategory category) {
+        return new ProductRequest(name, description, price, quantity, category);
     }
 
     public static List<Product> oneListOfProducts() {
