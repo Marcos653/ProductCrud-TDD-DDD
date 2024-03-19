@@ -131,6 +131,10 @@ class ProductControllerTest {
     @Test
     @SneakyThrows
     void delete_shouldReturnStatusNotFound_whenProductNotFound() {
-        fail("not implemented");
+        doThrow(new EntityNotFoundException())
+                .when(service).delete(nonexistentId);
+
+        mockMvc.perform(delete(API_URL + "/{id}", nonexistentId))
+                .andExpect(status().isNotFound());
     }
 }
