@@ -1,0 +1,34 @@
+version: '3.1'
+
+services:
+  postgre-db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: products
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./scripts/init-scripts:/docker-entrypoint-initdb.d
+    networks:
+      - products-network
+
+  products-service:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgre-db
+    networks:
+      - products-network
+    command: ["./scripts/wait-for-it.sh", "postgre-db", "5432", "Postgres"]
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgre-db:5432/products
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+
+networks:
+  products-network:
+    driver: bridge
