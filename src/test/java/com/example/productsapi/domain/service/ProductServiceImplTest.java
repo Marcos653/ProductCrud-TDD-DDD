@@ -19,6 +19,7 @@ import java.util.Optional;
 
 import static com.example.productsapi.helper.ProductHelper.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -95,5 +96,10 @@ class ProductServiceImplTest {
 
         verify(repository).findById(productId);
         verify(mapper).toProductResponse(product);
+    }
+
+    @Test
+    void getById_shouldNotReturnProductResponse_whenProductIdNotFound() {
+        fail("Not implemented");
     }
 }
