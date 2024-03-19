@@ -77,6 +77,12 @@ class ProductControllerTest {
 
     @Test
     @SneakyThrows
+    void save_shouldReturnStatusBadRequest_whenProductRequestInvalid() {
+        fail("Not implemented");
+    }
+
+    @Test
+    @SneakyThrows
     void update_shouldReturnStatusOk_whenCalled() {
         mockMvc.perform(put(API_URL + "/{id}", productId)
                         .content(convertObjectToJsonBytes(productRequest))
