@@ -110,4 +110,9 @@ class ProductServiceImplTest {
 
         verify(repository).findById(nonexistentId);
     }
+
+    @Test
+    void save_shouldSaveProduct_whenCalled() {
+        fail("not implemented");
+    }
 }
