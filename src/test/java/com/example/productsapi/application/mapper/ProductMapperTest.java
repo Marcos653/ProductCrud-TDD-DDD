@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import static com.example.productsapi.helper.ProductHelper.oneProduct;
 import static com.example.productsapi.helper.ProductHelper.oneProductResponse;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Fail.fail;
 
 class ProductMapperTest {
 
@@ -37,5 +38,10 @@ class ProductMapperTest {
     void toProductResponse_shouldNotConvertToProductResponse_whenProductNull() {
         assertThat(mapper.toProductResponse(null))
                 .isNull();
+    }
+
+    @Test
+    void toProduct_shouldConvertToProduct_whenCalled() {
+        fail("not implemented");
     }
 }
