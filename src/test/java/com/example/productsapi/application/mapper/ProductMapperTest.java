@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 
 import static com.example.productsapi.helper.ProductHelper.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Fail.fail;
 
 class ProductMapperTest {
 
@@ -48,5 +49,10 @@ class ProductMapperTest {
                 .extracting("name", "description", "price", "quantity", "category")
                 .containsExactly(product.getName(), product.getDescription(),
                         product.getPrice(), product.getQuantity(), product.getCategory());
+    }
+
+    @Test
+    void toProduct_shouldNotConvertToProduct_whenProductRequestNull() {
+        fail("not implemented");
     }
 }
