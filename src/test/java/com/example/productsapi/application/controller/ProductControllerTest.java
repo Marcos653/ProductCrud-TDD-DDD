@@ -8,6 +8,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import lombok.SneakyThrows;
 
+import static org.assertj.core.api.Fail.fail;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -26,5 +27,11 @@ class ProductControllerTest {
     void getAll_shouldReturnStatusOk_whenCalled() {
         mockMvc.perform(get(API_URL))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    @SneakyThrows
+    void getById_shouldReturnStatusOk_whenCalled() {
+        fail("not implemented");
     }
 }
