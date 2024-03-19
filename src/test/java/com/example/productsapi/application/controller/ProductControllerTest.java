@@ -16,6 +16,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class ProductControllerTest {
 
     private static final String API_URL = "/api/products";
+    private final long productId = 1L;
+    private final long nonexistentId = 100L;
 
     @Autowired
     private MockMvc mockMvc;
@@ -32,6 +34,7 @@ class ProductControllerTest {
     @Test
     @SneakyThrows
     void getById_shouldReturnStatusOk_whenCalled() {
-        fail("not implemented");
+        mockMvc.perform(get(API_URL + "/{id}", productId))
+                .andExpect(status().isOk());
     }
 }

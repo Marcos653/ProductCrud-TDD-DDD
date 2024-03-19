@@ -20,4 +20,9 @@ public class ProductController implements IProductController {
     public List<ProductResponse> getAll() {
         return service.getAll();
     }
+
+    @Override
+    public ProductResponse getById(Long id) {
+        return service.getById(id);
+    }
 }
