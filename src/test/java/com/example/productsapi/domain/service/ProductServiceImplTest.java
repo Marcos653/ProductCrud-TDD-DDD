@@ -187,6 +187,14 @@ class ProductServiceImplTest {
 
     @Test
     void delete_shouldNotDeleteProduct_whenProductIdNotFound() {
-        fail("not implemented");
+        when(repository.findById(nonexistentId))
+                .thenReturn(Optional.empty());
+
+        assertThatExceptionOfType(EntityNotFoundException.class)
+                .isThrownBy(() -> productService.delete(nonexistentId))
+                .withMessage(PRODUCT_NOT_FOUND + nonexistentId);
+
+        verify(repository).findById(nonexistentId);
+        verify(repository, never()).deleteById(nonexistentId);
     }
 }
