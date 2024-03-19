@@ -37,4 +37,10 @@ class ProductControllerTest {
         mockMvc.perform(get(API_URL + "/{id}", productId))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    @SneakyThrows
+    void save_shouldReturnStatusOk_whenCalled() {
+        fail("not implemented");
+    }
 }
