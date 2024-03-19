@@ -184,4 +184,9 @@ class ProductServiceImplTest {
         verify(repository).findById(productId);
         verify(repository).deleteById(productId);
     }
+
+    @Test
+    void delete_shouldNotDeleteProduct_whenProductIdNotFound() {
+        fail("not implemented");
+    }
 }
