@@ -19,4 +19,7 @@ public interface IProductController {
 
     @PutMapping("{id}")
     ProductResponse update(@PathVariable Long id, @RequestBody ProductRequest request);
+
+    @DeleteMapping("{id}")
+    void delete(@PathVariable Long id);
 }

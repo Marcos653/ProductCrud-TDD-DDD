@@ -74,7 +74,8 @@ class ProductControllerTest {
 
     @Test
     @SneakyThrows
-    void delete_shouldReturnStatusNoContent_whenCalled() {
-        fail("not implemented");
+    void delete_shouldReturnStatusOk_whenCalled() {
+        mockMvc.perform(delete(API_URL + "/{id}", productId))
+                .andExpect(status().isOk());
     }
 }

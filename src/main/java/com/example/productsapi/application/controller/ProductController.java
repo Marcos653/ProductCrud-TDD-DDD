@@ -36,4 +36,9 @@ public class ProductController implements IProductController {
     public ProductResponse update(Long id, ProductRequest request) {
         return service.update(id, request);
     }
+
+    @Override
+    public void delete(Long id) {
+        service.delete(id);
+    }
 }
