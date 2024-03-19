@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 
 import static com.example.productsapi.helper.ProductHelper.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Fail.fail;
 
 class ProductMapperTest {
 

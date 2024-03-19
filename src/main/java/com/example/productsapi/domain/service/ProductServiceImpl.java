@@ -1,5 +1,6 @@
 package com.example.productsapi.domain.service;
 
+import com.example.productsapi.application.dto.request.ProductRequest;
 import com.example.productsapi.domain.model.Product;
 import com.example.productsapi.application.mapper.ProductMapper;
 import com.example.productsapi.domain.repository.IProductRepository;
@@ -31,6 +32,12 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public ProductResponse getById(Long id) {
         return mapper.toProductResponse(getProductById(id));
+    }
+
+    @Override
+    public ProductResponse save(ProductRequest request) {
+        return mapper.toProductResponse(repository
+                .save(mapper.toProduct(request)));
     }
 
     private Product getProductById(Long id) {

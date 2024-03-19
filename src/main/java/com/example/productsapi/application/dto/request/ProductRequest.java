@@ -1,10 +1,10 @@
 package com.example.productsapi.application.dto.request;
 
 import com.example.productsapi.domain.enums.ECategory;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
 public record ProductRequest(
         @NotBlank

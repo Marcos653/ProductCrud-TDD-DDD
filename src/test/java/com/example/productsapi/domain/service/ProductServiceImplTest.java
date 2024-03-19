@@ -1,5 +1,6 @@
 package com.example.productsapi.domain.service;
 
+import com.example.productsapi.application.dto.request.ProductRequest;
 import com.example.productsapi.domain.model.Product;
 import com.example.productsapi.domain.enums.ECategory;
 import com.example.productsapi.application.mapper.ProductMapper;
@@ -40,6 +41,7 @@ class ProductServiceImplTest {
     private List<Product> products;
     private Product product;
     private ProductResponse productResponse;
+    private ProductRequest productRequest;
 
     @BeforeEach
     void setUp() {
@@ -48,6 +50,8 @@ class ProductServiceImplTest {
                 new BigDecimal("1500.00"), 10, ECategory.ELECTRONICS);
         productResponse = oneProductResponse(productId, "Laptop", "High-end gaming laptop",
                 new BigDecimal("1500.00"), 10, ECategory.ELECTRONICS.getDisplayName());
+        productRequest = oneProductRequest("Laptop", "High-end gaming laptop",
+                new BigDecimal("1500.00"), 10, ECategory.ELECTRONICS);
     }
 
     @Test
@@ -113,6 +117,21 @@ class ProductServiceImplTest {
 
     @Test
     void save_shouldSaveProduct_whenCalled() {
-        fail("not implemented");
+        when(repository.save(product))
+                .thenReturn(product);
+        when(mapper.toProduct(productRequest))
+                .thenReturn(product);
+        when(mapper.toProductResponse(product))
+                .thenReturn(productResponse);
+
+        var result = productService.save(productRequest);
+
+        assertThat(result)
+                .isInstanceOf(ProductResponse.class)
+                .isNotNull();
+
+        verify(mapper).toProduct(productRequest);
+        verify(repository).save(product);
+        verify(mapper).toProductResponse(product);
     }
 }
