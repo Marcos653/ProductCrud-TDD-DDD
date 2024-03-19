@@ -99,7 +99,13 @@ class ProductControllerTest {
     @Test
     @SneakyThrows
     void update_shouldReturnStatusNotFound_whenProductNotFound() {
-        fail("Not implemented");
+        doThrow(new EntityNotFoundException())
+                .when(service).update(nonexistentId, productRequest);
+
+        mockMvc.perform(put(API_URL + "/{id}", nonexistentId)
+                        .content(convertObjectToJsonBytes(productRequest))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
 
     @Test
