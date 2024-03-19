@@ -134,4 +134,9 @@ class ProductServiceImplTest {
         verify(repository).save(product);
         verify(mapper).toProductResponse(product);
     }
+
+    @Test
+    void update_shouldUpdateProduct_whenCalled() {
+        fail("not implemented");
+    }
 }
