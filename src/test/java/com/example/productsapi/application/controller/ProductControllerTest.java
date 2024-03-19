@@ -98,6 +98,12 @@ class ProductControllerTest {
 
     @Test
     @SneakyThrows
+    void update_shouldReturnStatusNotFound_whenProductNotFound() {
+        fail("Not implemented");
+    }
+
+    @Test
+    @SneakyThrows
     void delete_shouldReturnStatusOk_whenCalled() {
         mockMvc.perform(delete(API_URL + "/{id}", productId))
                 .andExpect(status().isOk());
