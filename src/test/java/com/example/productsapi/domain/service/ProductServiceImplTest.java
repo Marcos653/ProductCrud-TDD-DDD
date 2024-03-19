@@ -160,6 +160,15 @@ class ProductServiceImplTest {
 
     @Test
     void update_shouldNotUpdateProduct_whenProductIdNotFound() {
-        fail("not implemented");
+        when(repository.findById(nonexistentId))
+                .thenReturn(Optional.empty());
+
+        assertThatExceptionOfType(EntityNotFoundException.class)
+                .isThrownBy(() -> productService.update(nonexistentId, productRequest))
+                .withMessage(PRODUCT_NOT_FOUND + nonexistentId);
+
+        verify(repository).findById(nonexistentId);
+        verifyNoInteractions(mapper);
+        verify(repository, never()).save(product);
     }
 }
