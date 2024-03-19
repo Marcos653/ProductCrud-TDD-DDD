@@ -14,4 +14,6 @@ public interface IProductService {
     ProductResponse save(ProductRequest request);
 
     ProductResponse update(Long id, ProductRequest request);
+
+    void delete(Long id);
 }

@@ -1,9 +1,9 @@
 package com.example.productsapi.domain.service;
 
-import com.example.productsapi.application.dto.request.ProductRequest;
 import com.example.productsapi.domain.model.Product;
 import com.example.productsapi.application.mapper.ProductMapper;
 import com.example.productsapi.domain.repository.IProductRepository;
+import com.example.productsapi.application.dto.request.ProductRequest;
 import com.example.productsapi.domain.service.contract.IProductService;
 import com.example.productsapi.application.dto.response.ProductResponse;
 import org.springframework.stereotype.Service;
@@ -47,6 +47,12 @@ public class ProductServiceImpl implements IProductService {
         product.setId(id);
 
         return mapper.toProductResponse(repository.save(product));
+    }
+
+    @Override
+    public void delete(Long id) {
+        getProductById(id);
+        repository.deleteById(id);
     }
 
     private Product getProductById(Long id) {

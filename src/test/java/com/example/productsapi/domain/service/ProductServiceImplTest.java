@@ -174,6 +174,14 @@ class ProductServiceImplTest {
 
     @Test
     void delete_shouldDeleteProduct_whenCalled() {
-        fail("not implemented");
+        when(repository.findById(productId))
+                .thenReturn(Optional.of(product));
+        doNothing().when(repository).deleteById(productId);
+
+        assertThatCode(() -> productService.delete(productId))
+                .doesNotThrowAnyException();
+
+        verify(repository).findById(productId);
+        verify(repository).deleteById(productId);
     }
 }
