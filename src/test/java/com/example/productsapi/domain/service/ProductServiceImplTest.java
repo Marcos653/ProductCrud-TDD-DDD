@@ -171,4 +171,9 @@ class ProductServiceImplTest {
         verifyNoInteractions(mapper);
         verify(repository, never()).save(product);
     }
+
+    @Test
+    void delete_shouldDeleteProduct_whenCalled() {
+        fail("not implemented");
+    }
 }
