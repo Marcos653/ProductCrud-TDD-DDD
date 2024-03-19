@@ -3,6 +3,7 @@ package com.example.productsapi.application.controller;
 import com.example.productsapi.application.dto.request.ProductRequest;
 import com.example.productsapi.domain.enums.ECategory;
 import com.example.productsapi.domain.service.contract.IProductService;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.math.BigDecimal;
 import static com.example.productsapi.helper.ProductHelper.oneProductRequest;
 import static com.example.productsapi.helper.TestsHelper.convertObjectToJsonBytes;
 import static org.assertj.core.api.Fail.fail;
+import static org.mockito.Mockito.doThrow;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -57,7 +59,11 @@ class ProductControllerTest {
     @Test
     @SneakyThrows
     void getById_shouldReturnStatusNotFound_whenProductNotFound() {
-        fail("Not implemented");
+        doThrow(new EntityNotFoundException())
+                .when(service).getById(nonexistentId);
+
+        mockMvc.perform(get(API_URL + "/{id}", nonexistentId))
+                .andExpect(status().isNotFound());
     }
 
     @Test
