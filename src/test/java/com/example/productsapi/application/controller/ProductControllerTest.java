@@ -17,8 +17,7 @@ import java.math.BigDecimal;
 import static com.example.productsapi.helper.ProductHelper.oneProductRequest;
 import static com.example.productsapi.helper.TestsHelper.convertObjectToJsonBytes;
 import static org.assertj.core.api.Fail.fail;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(ProductController.class)
@@ -67,6 +66,9 @@ class ProductControllerTest {
     @Test
     @SneakyThrows
     void update_shouldReturnStatusOk_whenCalled() {
-        fail("not implemented");
+        mockMvc.perform(put(API_URL + "/{id}", productId)
+                        .content(convertObjectToJsonBytes(productRequest))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 }

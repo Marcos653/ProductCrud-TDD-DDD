@@ -31,4 +31,9 @@ public class ProductController implements IProductController {
     public ProductResponse save(ProductRequest request) {
         return service.save(request);
     }
+
+    @Override
+    public ProductResponse update(Long id, ProductRequest request) {
+        return service.update(id, request);
+    }
 }
