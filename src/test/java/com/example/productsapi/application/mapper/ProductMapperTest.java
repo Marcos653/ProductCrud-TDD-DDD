@@ -1,5 +1,6 @@
 package com.example.productsapi.application.mapper;
 
+import com.example.productsapi.application.dto.request.ProductRequest;
 import com.example.productsapi.domain.model.Product;
 import com.example.productsapi.domain.enums.ECategory;
 import com.example.productsapi.application.dto.response.ProductResponse;
@@ -8,8 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import java.math.BigDecimal;
 
-import static com.example.productsapi.helper.ProductHelper.oneProduct;
-import static com.example.productsapi.helper.ProductHelper.oneProductResponse;
+import static com.example.productsapi.helper.ProductHelper.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
 
@@ -19,6 +19,7 @@ class ProductMapperTest {
 
     private Product product;
     private ProductResponse productResponse;
+    private ProductRequest productRequest;
 
     @BeforeEach
     void setUp() {
@@ -26,6 +27,8 @@ class ProductMapperTest {
                 new BigDecimal("1500.00"), 10, ECategory.ELECTRONICS);
         productResponse = oneProductResponse(1L, "Laptop", "High-end gaming laptop",
                 new BigDecimal("1500.00"), 10, ECategory.ELECTRONICS.getDisplayName());
+        productRequest = oneProductRequest("Laptop", "High-end gaming laptop",
+                new BigDecimal("1500.00"), 10, ECategory.ELECTRONICS);
     }
 
     @Test
@@ -42,6 +45,9 @@ class ProductMapperTest {
 
     @Test
     void toProduct_shouldConvertToProduct_whenCalled() {
-        fail("not implemented");
+        assertThat(mapper.toProduct(productRequest))
+                .extracting("name", "description", "price", "quantity", "category")
+                .containsExactly(product.getName(), product.getDescription(),
+                        product.getPrice(), product.getQuantity(), product.getCategory());
     }
 }
