@@ -71,4 +71,10 @@ class ProductControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    @SneakyThrows
+    void delete_shouldReturnStatusNoContent_whenCalled() {
+        fail("not implemented");
+    }
 }
