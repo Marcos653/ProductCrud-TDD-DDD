@@ -137,6 +137,24 @@ class ProductServiceImplTest {
 
     @Test
     void update_shouldUpdateProduct_whenCalled() {
-        fail("not implemented");
+        when(repository.findById(productId))
+                .thenReturn(Optional.of(product));
+        when(repository.save(product))
+                .thenReturn(product);
+        when(mapper.toProduct(productRequest))
+                .thenReturn(product);
+        when(mapper.toProductResponse(product))
+                .thenReturn(productResponse);
+
+        var result = productService.update(productId, productRequest);
+
+        assertThat(result)
+                .isInstanceOf(ProductResponse.class)
+                .isNotNull();
+
+        verify(repository).findById(productId);
+        verify(mapper).toProduct(productRequest);
+        verify(repository).save(product);
+        verify(mapper).toProductResponse(product);
     }
 }

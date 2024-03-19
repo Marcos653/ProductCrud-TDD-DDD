@@ -12,4 +12,6 @@ public interface IProductService {
     ProductResponse getById(Long id);
 
     ProductResponse save(ProductRequest request);
+
+    ProductResponse update(Long id, ProductRequest request);
 }

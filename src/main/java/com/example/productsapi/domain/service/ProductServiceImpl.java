@@ -40,6 +40,15 @@ public class ProductServiceImpl implements IProductService {
                 .save(mapper.toProduct(request)));
     }
 
+    @Override
+    public ProductResponse update(Long id, ProductRequest request) {
+        getProductById(id);
+        var product = mapper.toProduct(request);
+        product.setId(id);
+
+        return mapper.toProductResponse(repository.save(product));
+    }
+
     private Product getProductById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(PRODUCT_NOT_FOUND + id));
