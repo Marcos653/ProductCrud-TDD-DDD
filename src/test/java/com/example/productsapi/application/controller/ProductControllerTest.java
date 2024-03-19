@@ -1,23 +1,22 @@
 package com.example.productsapi.application.controller;
 
-import com.example.productsapi.application.dto.request.ProductRequest;
 import com.example.productsapi.domain.enums.ECategory;
+import com.example.productsapi.application.dto.request.ProductRequest;
 import com.example.productsapi.domain.service.contract.IProductService;
-import jakarta.persistence.EntityNotFoundException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import lombok.SneakyThrows;
 
 import java.math.BigDecimal;
+import jakarta.persistence.EntityNotFoundException;
 
 import static com.example.productsapi.helper.ProductHelper.oneProductRequest;
 import static com.example.productsapi.helper.TestsHelper.convertObjectToJsonBytes;
-import static org.assertj.core.api.Fail.fail;
 import static org.mockito.Mockito.doThrow;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -113,7 +112,6 @@ class ProductControllerTest {
     void update_shouldReturnStatusBadRequest_whenProductRequestInvalid() {
         var productRequestInvalid = oneProductRequest("Invalid", "Product Request Invalid",
                 null, null, null);
-
 
         mockMvc.perform(put(API_URL + "/{id}", productId)
                         .content(convertObjectToJsonBytes(productRequestInvalid))

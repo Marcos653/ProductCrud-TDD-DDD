@@ -1,17 +1,17 @@
 package com.example.productsapi.application.exception;
 
 import com.example.productsapi.application.exception.dto.ErrorMessage;
-import jakarta.persistence.EntityNotFoundException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
+import jakarta.persistence.EntityNotFoundException;
 
 @RestControllerAdvice
 @RequiredArgsConstructor
